@@ -15,6 +15,7 @@ def draw(points: {float: float}, functions: [Function]):
         x = np.linspace(min_x, max_x, len(points) * 10)
         plt.plot(x, f.function(x), label=f.text)
 
-    lg = plt.legend(bbox_to_anchor=(1, 1))
-    plt.savefig('graph.png', bbox_extra_artists=(lg,), bbox_inches='tight')
+    plt.legend(loc="best", fontsize='x-small')
+    plt.savefig('graph.png')
+    plt.show()
 

@@ -6,4 +6,5 @@ from typing import Callable
 class Function:
     function: Callable
     text: str
-    S: float
+    s: float
+    root_mean_square_deviation: float

@@ -1,8 +1,10 @@
 def read_function_table() -> {float: float}:
     function_table = {}
     while True:
-        filename = input("Введите имя файла для загрузки исходных данных "
-                         "или пустую строку, чтобы ввести вручную: ")
+        # filename = input("Введите имя файла для загрузки исходных данных "
+        #                  "или пустую строку, чтобы ввести вручную: ")
+        filename = "input.txt"
+
         if filename == '':
             while True:
                 line = input()
