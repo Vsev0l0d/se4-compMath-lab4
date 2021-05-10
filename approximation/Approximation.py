@@ -9,9 +9,9 @@ class Approximation:
 
     @staticmethod
     def print_approximation_table(self, function_table: dict[float, float], f: Function, decimals=3):
-        x = np.around(function_table.keys(), decimals)
-        y = np.around(function_table.values(), decimals)
-        approximated_y = np.around((round(f.function(x), decimals) for x in function_table.keys()), decimals)
+        x = np.around(list(function_table.keys()), decimals)
+        y = np.around(list(function_table.values()), decimals)
+        approximated_y = np.around(list(round(f.function(x), decimals) for x in function_table.keys()), decimals)
 
         logging.info(self.function_type)
         approximation_table = PrettyTable()
