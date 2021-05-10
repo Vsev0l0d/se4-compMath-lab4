@@ -14,10 +14,10 @@ targets = logging.StreamHandler(sys.stdout), logging.FileHandler('output.txt', m
 logging.basicConfig(format='%(message)s', level=logging.INFO, handlers=targets)
 
 approximations = [LinearApproximation(),
+                  SquareApproximation(),
                   ExponentialApproximation(),
                   LogarithmicallyApproximation(),
-                  PowerApproximation(),
-                  SquareApproximation()]
+                  PowerApproximation()]
 
 while True:
     function_table = mainboilerplate.read_function_table()

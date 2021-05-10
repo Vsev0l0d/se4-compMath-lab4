@@ -7,5 +7,5 @@ class ExponentialApproximation(Approximation):
 
     def find_an_approximation(self, function_table: dict) -> Function:
         f = Function(lambda x: x, "sex", 6, 9)
-        self.print_approximation_table(function_table, f, f.text)
+        self.print_approximation_table(function_table, f, self.function_type)
         return f
