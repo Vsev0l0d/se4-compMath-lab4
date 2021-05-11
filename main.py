@@ -21,7 +21,11 @@ approximations = [LinearApproximation(),
 
 while True:
     function_table = mainboilerplate.read_function_table()
-    functions = list(a.find_an_approximation(function_table) for a in approximations)
+    functions = []
+    for a in approximations:
+        f = a.find_an_approximation(function_table)
+        if f is not None:
+            functions.append(f)
 
     functions.sort(key=lambda x: x.root_mean_square_deviation)
     results_table = PrettyTable()

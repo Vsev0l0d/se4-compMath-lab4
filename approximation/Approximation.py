@@ -8,6 +8,13 @@ class Approximation:
     function_type = None
 
     @staticmethod
+    def solve_matrix22(a, b):
+        delta = a[0][0] * a[1][1] - a[0][1] * a[1][0]
+        delta1 = b[0] * a[1][1] - a[0][1] * b[1]
+        delta2 = a[0][0] * b[1] - b[0] * a[1][0]
+        return (delta1 / delta, delta2 / delta) if delta != 0 else (None, None)
+
+    @staticmethod
     def print_approximation_table(function_table: dict,
                                   f: Function, function_type: str, decimals=3):
         x = np.around(list(function_table.keys()), decimals)
