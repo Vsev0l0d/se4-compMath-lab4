@@ -1,4 +1,4 @@
-from numpy.ma import log, sqrt
+from numpy.ma import log, sqrt, exp
 from Function import Function
 from approximation.Approximation import Approximation
 
@@ -16,7 +16,8 @@ class PowerApproximation(Approximation):
         except ValueError:
             return None
 
-        a, b = self.solve_matrix22([[n, SLNX], [SLNX, SLNXX]], [SLNY, SLNXY])
+        b, a = self.solve_matrix22([[n, SLNX], [SLNX, SLNXX]], [SLNY, SLNXY])
+        a = exp(a)
         if a is None:
             return None
         fun = lambda x: a * (x ** b)
