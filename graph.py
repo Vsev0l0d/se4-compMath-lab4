@@ -11,8 +11,8 @@ def draw(points: {float: float}, functions: [Function]):
 
     min_x = min(points.keys())
     max_x = max(points.keys())
+    x = np.linspace(min_x, max_x, len(points) * 10)
     for f in functions:
-        x = np.linspace(min_x, max_x, len(points) * 10)
         plt.plot(x, f.function(x), label=f.text)
 
     plt.legend(loc="best", fontsize='x-small')

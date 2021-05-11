@@ -1,5 +1,4 @@
-from math import log, sqrt, e
-
+from numpy.ma import log, sqrt, exp
 from Function import Function
 from approximation.Approximation import Approximation
 
@@ -20,7 +19,7 @@ class ExponentialApproximation(Approximation):
         a, b = self.solve_matrix22([[n, SX], [SX, SXX]], [SLNY, SXLNY])
         if a is None:
             return None
-        fun = lambda x: a * (e ** (b * x))
+        fun = lambda x: a * (exp(b * x))
         s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
         root_mean_square_deviation = sqrt(s / n)
         f = Function(fun, f'ф = {round(a, 3)}*e^({round(b, 3)}*x)', s, root_mean_square_deviation)

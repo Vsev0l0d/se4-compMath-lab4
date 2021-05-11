@@ -1,7 +1,7 @@
-from math import sqrt
+import logging
+from numpy.ma import sqrt
 from Function import Function
 from approximation.Approximation import Approximation
-import logging
 
 
 class LinearApproximation(Approximation):

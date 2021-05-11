@@ -1,5 +1,4 @@
-from math import sqrt
-
+from numpy.ma import sqrt
 from Function import Function
 from approximation.Approximation import Approximation
 
