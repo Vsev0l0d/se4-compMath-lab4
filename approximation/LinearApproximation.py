@@ -14,7 +14,7 @@ class LinearApproximation(Approximation):
         SXY = sum(x * y for x, y in function_table.items())
         n = len(function_table)
 
-        a, b = self.solve_matrix22([[SXX, SX], [SX, n]], [SXY, SY])
+        a, b = self.solve_matrix22([[n, SX], [SX, SXX]], [SY, SXY])
         if a is None:
             return None
         fun = lambda x: a * x + b

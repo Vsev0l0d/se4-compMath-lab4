@@ -1,3 +1,5 @@
+from math import log, sqrt, e
+
 from Function import Function
 from approximation.Approximation import Approximation
 
@@ -6,6 +8,21 @@ class ExponentialApproximation(Approximation):
     function_type = "Экспоненциальная зависимость"
 
     def find_an_approximation(self, function_table: dict) -> Function:
-        f = Function(lambda x: x, "sex", 6, 9)
+        try:
+            SX = sum(function_table.keys())
+            SXX = sum(x * x for x in function_table.keys())
+            SLNY = sum(log(y) for y in function_table.values())
+            SXLNY = sum(x * log(y) for x, y in function_table.items())
+            n = len(function_table)
+        except ValueError:
+            return None
+
+        a, b = self.solve_matrix22([[n, SX], [SX, SXX]], [SLNY, SXLNY])
+        if a is None:
+            return None
+        fun = lambda x: a * (e ** (b * x))
+        s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
+        root_mean_square_deviation = sqrt(s / n)
+        f = Function(fun, f'ф = {round(a, 3)}*e^({round(b, 3)}*x)', s, root_mean_square_deviation)
         self.print_approximation_table(function_table, f, self.function_type)
         return f
