@@ -15,6 +15,18 @@ class Approximation:
         return (delta1 / delta, delta2 / delta) if delta != 0 else (None, None)
 
     @staticmethod
+    def solve_matrix33(a, b):
+        delta = (a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
+                 - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[0][0] * a[1][2] * a[2][1])
+        delta2 = (a[0][0] * b[1] * a[2][2] + a[1][0] * b[2] * a[0][2] + b[0] * a[1][2] * a[2][0]
+                  - a[0][2] * b[1] * a[2][0] - b[0] * a[1][0] * a[2][2] - a[0][0] * a[1][2] * b[2])
+        delta1 = (a[0][0] * a[1][1] * b[2] + a[1][0] * a[2][1] * b[0] + a[0][1] * b[1] * a[2][0]
+                  - b[0] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * b[2] - a[0][0] * b[1] * a[2][1])
+        delta3 = (b[0] * a[1][1] * a[2][2] + b[1] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * b[2]
+                  - a[0][2] * a[1][1] * b[2] - a[0][1] * b[1] * a[2][2] - b[0] * a[1][2] * a[2][1])
+        return (delta1 / delta, delta2 / delta, delta3 / delta) if delta != 0 else (None, None, None)
+
+    @staticmethod
     def print_approximation_table(function_table: dict,
                                   f: Function, function_type: str, decimals=3):
         x = np.around(list(function_table.keys()), decimals)

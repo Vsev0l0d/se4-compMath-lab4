@@ -20,7 +20,7 @@ class LinearApproximation(Approximation):
         fun = lambda x: a * x + b
         s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
         root_mean_square_deviation = sqrt(s / n)
-        f = Function(fun, f'ф= {round(a, 3)}*x + {round(b, 3)}', s, root_mean_square_deviation)
+        f = Function(fun, f'ф = {round(a, 3)}*x {round(b, 3):+}', s, root_mean_square_deviation)
         self.print_approximation_table(function_table, f, self.function_type)
 
         average_x = SX / n
