@@ -16,13 +16,16 @@ class PowerApproximation(Approximation):
         except ValueError:
             return None
 
-        b, a = self.solve_matrix22([[n, SLNX], [SLNX, SLNXX]], [SLNY, SLNXY])
-        a = exp(a)
-        if a is None:
+        try:
+            b, a = self.solve_matrix22([[n, SLNX], [SLNX, SLNXX]], [SLNY, SLNXY])
+            if a is None:
+                return None
+            a = exp(a)
+            fun = lambda x: a * (x ** b)
+            s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
+            root_mean_square_deviation = sqrt(s / n)
+            f = Function(fun, f'ф = {round(a, 3)}*x^({round(b, 3)})', s, root_mean_square_deviation)
+            self.print_approximation_table(function_table, f, self.function_type)
+            return f
+        except TypeError:
             return None
-        fun = lambda x: a * (x ** b)
-        s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
-        root_mean_square_deviation = sqrt(s / n)
-        f = Function(fun, f'ф = {round(a, 3)}*x^({round(b, 3)})', s, root_mean_square_deviation)
-        self.print_approximation_table(function_table, f, self.function_type)
-        return f

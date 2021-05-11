@@ -16,12 +16,15 @@ class ExponentialApproximation(Approximation):
         except ValueError:
             return None
 
-        a, b = self.solve_matrix22([[n, SX], [SX, SXX]], [SLNY, SXLNY])
-        if a is None:
+        try:
+            a, b = self.solve_matrix22([[n, SX], [SX, SXX]], [SLNY, SXLNY])
+            if a is None:
+                return None
+            fun = lambda x: (exp(a * x + b))
+            s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
+            root_mean_square_deviation = sqrt(s / n)
+            f = Function(fun, f'ф = e^({round(a, 3)}*x {round(b, 3):+})', s, root_mean_square_deviation)
+            self.print_approximation_table(function_table, f, self.function_type)
+            return f
+        except TypeError:
             return None
-        fun = lambda x: (exp(a * x + b))
-        s = sum((fun(x) - function_table[x]) ** 2 for x in function_table.keys())
-        root_mean_square_deviation = sqrt(s / n)
-        f = Function(fun, f'ф = e^({round(a, 3)}*x {round(b, 3):+})', s, root_mean_square_deviation)
-        self.print_approximation_table(function_table, f, self.function_type)
-        return f
